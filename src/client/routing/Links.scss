@@ -1,0 +1,23 @@
+@import '../css/_variables';
+
+.navigation-link {
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  color: #fff;
+}
+
+.navigation-link:hover {
+  background: $navigation-hover;
+}
+
+.navigation-link.active {
+  border-left: 4px solid $navigation-active-border;
+  background: $navigation-hover;
+}
+
+.navigation-link.active .navigation-link__icon {
+  margin-left: -4px;
+}

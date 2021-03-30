@@ -1,0 +1,5 @@
+# Files to exclude from docker context
+./bin
+./docs
+./coverage
+./node_modules

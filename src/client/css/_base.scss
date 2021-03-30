@@ -1,0 +1,51 @@
+@import '_variables';
+
+*, *:after, *:before {
+  -webkit-tap-highlight-color: $transparent-background;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ol, ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.shadow {
+  box-shadow: 2px 2px 2px $shadow-background;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+  display: flex;
+}
+
+.inner {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 950px) and (max-width: 1400px) {
+  .inner {
+    max-width: 1024px;
+    width: 95%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .inner {
+    max-width: 1200px;
+    width: 75%;
+  }
+}

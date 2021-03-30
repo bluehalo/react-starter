@@ -1,0 +1,40 @@
+@import 'css/_variables';
+@import 'css/_base';
+
+html,
+body,
+.app-root {
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.app-root {
+    flex-direction: column;
+    line-height: 1.5;
+    overflow: hidden;
+    display: flex;
+}
+
+.header,
+.footer {
+  background: $classification-background;
+  color: $classification-color;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.body {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+
+@import 'core/Loader';
+@import 'core/Body';

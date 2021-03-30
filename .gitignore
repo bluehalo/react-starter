@@ -1,0 +1,11 @@
+# System/IDE files
+.DS_Store
+.idea
+
+# Dependencies
+node_modules
+
+# Generated code
+coverage
+public
+bin

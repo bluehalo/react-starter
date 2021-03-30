@@ -1,0 +1,17 @@
+@import '../css/_variables';
+
+.main-content {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.navigation {
+  box-shadow: 2px 0 4px $shadow-background;
+  background: $navigation-background;
+}
+
+.navigation-menu {
+  width: 60px;
+}
+
+@import '../routing/Links.scss';

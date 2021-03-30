@@ -1,0 +1,26 @@
+doctype
+html
+	head
+		//- Generic Meta tags
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1')
+		meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+		//- These require variables to be set
+		meta(name='author', content=author)
+		meta(name='keywords', content=keywords)
+		meta(name='description', content=description)
+		//- This should be updated as we develop for enhanced security
+		meta(http-equiv='Content-Security-Policy', content=contentSecurityPolicy)
+		//- Default Page Title
+		title #{title}
+		//- Option to embed extra content in future
+		block head
+		//- Inline critical styles if there are any per page
+		if css
+			style
+				!= css
+	//- Add an option for ssr here as well
+	body
+		div(id='app-root',class='app-root')
+		script(src=commonSrc)
+		script(src=mainSrc)
