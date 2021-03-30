@@ -4,6 +4,7 @@ on:
     push:
 
 env:
+    NODE_ENV: 'production'
 
 jobs:
     run-linter:
