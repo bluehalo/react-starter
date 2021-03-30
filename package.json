@@ -1,9 +1,9 @@
 {
-	"name": "react-spa",
+	"name": "react-starter",
 	"version": "1.0.0",
 	"description": "Starter package for a React based single page application.",
 	"main": "src/main.js",
-	"repository": "git@bitbucket.org:asymmetrik/react-spa.git",
+	"repository": "git@github.com:Asymmetrik/react-starter.git",
 	"author": "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
 	"license": "MIT",
 	"private": true,
