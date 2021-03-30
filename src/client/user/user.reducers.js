@@ -16,8 +16,7 @@ export function getUser(state = defaultAppState.user, action) {
 		case 'user/get':
 		case 'user/login':
 			return state.withMutations((user) => {
-				user
-					.set('status', 'SUCCESS')
+				user.set('status', 'SUCCESS')
 					.set('error', undefined)
 					// data is the http respons in this case, needs to be ocnverted to Map
 					// .set('data', data);

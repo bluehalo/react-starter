@@ -23,7 +23,7 @@ export default [
 		icon: HomeIcon,
 		name: 'Home',
 		exact: true,
-		path: '/'
+		path: '/',
 	},
 	{
 		/* istanbul ignore next line */
@@ -41,7 +41,7 @@ export default [
 		icon: InfoIcon,
 		name: 'Info',
 		exact: true,
-		path: '/info'
+		path: '/info',
 	},
 	{
 		/* istanbul ignore next line */

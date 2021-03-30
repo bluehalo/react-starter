@@ -18,7 +18,5 @@ export default function Loader() {
 		return () => clearTimeout(timeout);
 	}, []);
 
-	return isPastDelay
-		? <span className="loading-indicator">Loading ... </span>
-		: null;
+	return isPastDelay ? <span className="loading-indicator">Loading ... </span> : null;
 }
