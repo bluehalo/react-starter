@@ -1,0 +1,31 @@
+name: Run Linter
+
+on:
+    push:
+
+env:
+
+jobs:
+    run-linter:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [10.x, 12.x]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.JS ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install
+              run: npm install
+
+            - name: Check Prettier
+              run: npm run prettier --check "**/*.js"
+
+            - name: Check Linter
+              run: npm run linter
