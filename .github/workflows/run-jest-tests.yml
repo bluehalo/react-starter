@@ -4,7 +4,7 @@ on:
     push:
 
 env:
-    NODE_ENV: 'production'
+    NODE_ENV: 'development'
 
 jobs:
     run-jest:
@@ -23,7 +23,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
 
             - name: Install
-              run: npm install
+              run: yarn install
 
             - name: Run Jest Tests
-              run: npm run test
+              run: yarn test

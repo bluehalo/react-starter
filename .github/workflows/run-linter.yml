@@ -4,7 +4,7 @@ on:
     push:
 
 env:
-    NODE_ENV: 'production'
+    NODE_ENV: 'development'
 
 jobs:
     run-linter:
@@ -23,10 +23,10 @@ jobs:
                   node-version: ${{ matrix.node-version }}
 
             - name: Install
-              run: npm install
+              run: yarn install
 
             - name: Check Prettier
-              run: npm run prettier --check "**/*.js"
+              run: yarn run prettier --check "**/*.js"
 
             - name: Check Linter
-              run: npm run linter
+              run: yarn run linter
