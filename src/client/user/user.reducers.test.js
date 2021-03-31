@@ -50,7 +50,9 @@ describe('User Reducer Tests', () => {
 		});
 
 		test('should reset the user state on logout', () => {
-			let current = defaultAppState.user.set('data', new Map({ username: 'Scooby Doo' })).set('status', 'SUCCESS');
+			let current = defaultAppState.user
+				.set('data', new Map({ username: 'Scooby Doo' }))
+				.set('status', 'SUCCESS');
 
 			let results = getUser(current, { type: 'user/logout' });
 

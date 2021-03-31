@@ -14,13 +14,8 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "react"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "settings": {
     "react": {
       "version": "detect"
@@ -34,22 +29,14 @@
     "react/jsx-uses-vars": 2,
     "react/no-danger": 0,
     "react/no-deprecated": 2,
-    "react/no-did-mount-set-state": [
-      2
-    ],
-    "react/no-did-update-set-state": [
-      2
-    ],
+    "react/no-did-mount-set-state": [2],
+    "react/no-did-update-set-state": [2],
     "react/no-direct-mutation-state": 2,
     "react/no-is-mounted": 2,
     "react/no-unknown-property": 2,
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 2,
-    "quotes": [
-      2,
-      "single",
-      "avoid-escape"
-    ],
+    "quotes": [2, "single", "avoid-escape"],
     "no-compare-neg-zero": 0,
     "no-console": 0,
     "no-debugger": 2,
@@ -83,12 +70,9 @@
     "no-trailing-spaces": 2,
     "no-undef-init": 2,
     "no-unused-expressions": 2,
-    "no-mixed-spaces-and-tabs": [
-      "error",
-      "smart-tabs"
-    ],
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
     "no-unused-vars": [
-      2,
+      "warn",
       {
         "vars": "all",
         "args": "after-used",
@@ -99,10 +83,7 @@
     "no-useless-escape": 0,
     "no-with": 2,
     "comma-spacing": 2,
-    "curly": [
-      2,
-      "all"
-    ],
+    "curly": [2, "all"],
     "dot-notation": [
       2,
       {
@@ -110,10 +91,7 @@
       }
     ],
     "eol-last": 2,
-    "no-extra-parens": [
-      2,
-      "functions"
-    ],
+    "no-extra-parens": [2, "functions"],
     "eqeqeq": 2,
     "key-spacing": [
       2,
@@ -141,9 +119,6 @@
         "nonwords": false
       }
     ],
-    "yoda": [
-      2,
-      "never"
-    ]
+    "yoda": [2, "never"]
   }
 }
