@@ -26,7 +26,7 @@ export default function Body(props) {
 					<Links routes={routes} />
 				</ul>
 			</nav>
-			<div className="main-content">{isLoading ? <Loader /> : <Switch routes={routes} {...props} />}</div>
+			<div className="main-content flex">{isLoading ? <Loader /> : <Switch routes={routes} {...props} />}</div>
 		</main>
 	);
 }
