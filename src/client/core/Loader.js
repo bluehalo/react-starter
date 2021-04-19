@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
  */
 export default function Loader() {
 	let [isPastDelay, setIsPastDelay] = useState(false);
-	let [isMounted, setIsMounted] = useState(true);
 
 	// Use an effect to track mount and unmount
 	useEffect(() => {
