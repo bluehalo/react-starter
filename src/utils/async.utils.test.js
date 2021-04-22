@@ -1,7 +1,7 @@
-const { wrapper, middleware } = require('./async.utils');
+const { wrapper, middleware, regardless } = require('./async.utils');
 
 describe('Async Utils Tests', () => {
-	describe('method: wrapper', () => {
+	describe('function: wrapper', () => {
 		test('should pass data back from a promise', async () => {
 			let promise = Promise.resolve('Aegon');
 			let [err, results] = await wrapper(promise);
@@ -37,7 +37,7 @@ describe('Async Utils Tests', () => {
 		});
 	});
 
-	describe('method: middleware', () => {
+	describe('function: middleware', () => {
 		test('should allow an async controller to correctly resolve data', async () => {
 			async function controller(_req, _res, _next) {
 				// Just imagine we are waiting for something
@@ -89,6 +89,40 @@ describe('Async Utils Tests', () => {
 			expect(nextMock).toHaveBeenCalledTimes(1);
 			expect(nextMock.mock.calls[0][0]).toBeDefined();
 			expect(nextMock.mock.calls[0][0].message).toBe('Fubar');
+		});
+	});
+
+	describe('function: regardless', () => {
+		test('should resolve when all promises resolve', async () => {
+			let results = await regardless([Promise.resolve('tyrion'), Promise.resolve('daenerys')]);
+
+			expect(results).toBeDefined();
+			expect(results[0]).toBe('tyrion');
+			expect(results[1]).toBe('daenerys');
+		});
+
+		test('should resolve when all promises reject', async () => {
+			let aegon = () => Promise.reject('aegon');
+			let cersei = () => Promise.reject('cersei');
+
+			let results = await regardless([aegon(), cersei()]);
+
+			expect(results).toBeDefined();
+			expect(results[0]).toBe('aegon');
+			expect(results[1]).toBe('cersei');
+		});
+
+		test('should resolve when some resolve and some reject regardless of the failures', async () => {
+			let aegon = () => Promise.reject('aegon');
+			let cersei = () => Promise.reject('cersei');
+
+			let results = await regardless([aegon(), cersei(), Promise.resolve('tyrion'), Promise.resolve('daenerys')]);
+
+			expect(results).toBeDefined();
+			expect(results[0]).toBe('aegon');
+			expect(results[1]).toBe('cersei');
+			expect(results[2]).toBe('tyrion');
+			expect(results[3]).toBe('daenerys');
 		});
 	});
 });
