@@ -10,7 +10,7 @@ export default function Loader() {
 	// Use an effect to track mount and unmount
 	useEffect(() => {
 		// Set a timeout for 200 ms, we dont need to show the loader if
-		// the app is only loading something for 20 seconds
+		// the app is only loading something for 200 ms
 		let timeout = setTimeout(() => setIsPastDelay(true), 200);
 
 		// Clear the timeout is this component is unmounted
