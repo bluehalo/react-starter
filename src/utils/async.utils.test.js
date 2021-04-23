@@ -124,5 +124,19 @@ describe('Async Utils Tests', () => {
 			expect(results[2]).toBe('tyrion');
 			expect(results[3]).toBe('daenerys');
 		});
+
+		test('should allow me to filter errors from a group of promises', async () => {
+			let errorOne = () => Promise.reject(new Error('400'));
+			let errorTwo = () => Promise.reject(new Error('404'));
+
+			let results = await regardless([errorOne(), errorTwo(), Promise.resolve(12)]);
+			let errors = results.filter((result) => result instanceof Error);
+
+			expect(errors).toHaveLength(2);
+			expect(errors[0].message).toBe('400');
+			expect(errors[1].message).toBe('404');
+			expect(results).toHaveLength(3);
+			expect(results[2]).toBe(12);
+		});
 	});
 });
