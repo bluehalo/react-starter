@@ -1,4 +1,5 @@
 const controller = require('./user.controller');
+const { User } = require('./user.model');;
 
 let generateMockResponse = () => {
 	let response = {};
@@ -11,22 +12,13 @@ let generateMockResponse = () => {
 describe('User Controller Tests', () => {
 	describe('Method: getActiveUser', () => {
 		test('should set success based on whether a user is part of the request', () => {
-			let responseWithoutUser = generateMockResponse();
-			let responseWithUser = generateMockResponse();
-			let requestWithUser = { user: { email: 'foo@bar.edu' } };
-			let requestWithoutUser = {};
+			let response = generateMockResponse();
+			let request = {};
 			// Pass the mocks through
-			controller.getActiveUser(requestWithoutUser, responseWithoutUser);
-			controller.getActiveUser(requestWithUser, responseWithUser);
+			controller.getActiveUser(request, response);
 
-			expect(responseWithoutUser.status).toHaveBeenCalledWith(200);
-			expect(responseWithUser.status).toHaveBeenCalledWith(200);
-
-			expect(responseWithoutUser.json.mock.calls[0][0].user_data).toEqual({});
-			expect(responseWithoutUser.json.mock.calls[0][0].success).toBe(false);
-
-			expect(responseWithUser.json.mock.calls[0][0].user_data).toEqual({ email: 'foo@bar.edu' });
-			expect(responseWithUser.json.mock.calls[0][0].success).toBe(true);
+			expect(response.status).toHaveBeenCalledWith(200);
+			expect(response.json.mock.calls[0][0] instanceof User).toBeTruthy();
 		});
 	});
 
@@ -37,9 +29,9 @@ describe('User Controller Tests', () => {
 			// Pass our mock through
 			controller.login(undefined, response);
 
+			// These will need to be updated when the tests are up to date
 			expect(response.status).toHaveBeenCalledWith(200);
-			expect(response.json.mock.calls[0][0].user_data).toEqual(undefined);
-			expect(response.json.mock.calls[0][0].success).toBe(false);
+			expect(response.json.mock.calls[0][0] instanceof User).toBeTruthy();
 		});
 	});
 });

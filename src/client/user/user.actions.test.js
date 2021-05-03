@@ -15,7 +15,7 @@ describe('User Action Tests', () => {
 			let dispatch = jest.fn();
 
 			// Set the results of the service
-			service.__setResults(expected);
+			service.__setResults({ body: expected });
 
 			return action(dispatch).then(() => {
 				// Test that dispatch has been called
@@ -49,7 +49,7 @@ describe('User Action Tests', () => {
 	describe('action: login', () => {
 		test('should dispatch user logged in action on success', () => {
 			let user_data = { username: 'ScoobyDoo', email: 'scooby@mysteryinc.com' };
-			let expected = { body: { success: true, user_data } };
+			let expected = { body: user_data };
 			let action = login('username', 'password');
 			let dispatch = jest.fn();
 
@@ -62,7 +62,7 @@ describe('User Action Tests', () => {
 				// Test that it was called with the correct arguments
 				let args = dispatch.mock.calls[0][0];
 				expect(args.type).toBe('user/login');
-				expect(args.data).toEqual(expected);
+				expect(args.data).toEqual(user_data);
 			});
 		});
 

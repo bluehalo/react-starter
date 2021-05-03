@@ -8,7 +8,7 @@ export function getActiveUser() {
 	return (dispatch) => {
 		return service
 			.getActiveUser()
-			.then((response) => dispatch({ type: 'user/get', data: response }))
+			.then((response) => dispatch({ type: 'user/get', data: response.body }))
 			.catch((err) => dispatch({ type: 'user/get-failure', data: err }));
 	};
 }
@@ -23,7 +23,7 @@ export function login(username, password) {
 	return (dispatch) => {
 		return service
 			.login(username, password)
-			.then((response) => dispatch({ type: 'user/login', data: response }))
+			.then((response) => dispatch({ type: 'user/login', data: response.body }))
 			.catch((err) => dispatch({ type: 'user/login-failure', data: err }));
 	};
 }

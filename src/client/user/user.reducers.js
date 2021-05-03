@@ -18,9 +18,7 @@ export function getUser(state = defaultAppState.user, action) {
 			return state.withMutations((user) => {
 				user.set('status', 'SUCCESS')
 					.set('error', undefined)
-					// data is the http respons in this case, needs to be ocnverted to Map
-					// .set('data', data);
-					.set('data', defaultAppState.user.get('data'));
+					.set('data', data);
 			});
 		// User was unable to login for some reason or
 		// we are unable to get the current user

@@ -17,8 +17,7 @@ describe('User Reducer Tests', () => {
 			let response = { username: 'scooby', roles: [] };
 			let results = getUser(defaultAppState.user, { type: 'user/get', data: response });
 
-			// This is not yet implemented, we are currently returning the default user
-			expect(results.get('data')).toEqual(defaultAppState.user.get('data'));
+			expect(results.get('data')).toEqual(response);
 			expect(results.get('status')).toEqual('SUCCESS');
 			expect(results.get('error')).toBeUndefined();
 		});
@@ -27,8 +26,7 @@ describe('User Reducer Tests', () => {
 			let response = { username: 'scooby', roles: [] };
 			let results = getUser(defaultAppState.user, { type: 'user/login', data: response });
 
-			// This is not yet implemented, we are currently returning the default user
-			expect(results.get('data')).toEqual(defaultAppState.user.get('data'));
+			expect(results.get('data')).toEqual(response);
 			expect(results.get('status')).toEqual('SUCCESS');
 			expect(results.get('error')).toBeUndefined();
 		});
