@@ -21,7 +21,7 @@ export default function Body(props) {
 
 	return (
 		<main className="body flex">
-			<nav className="navigation">
+			<nav className="navigation" aria-label="Main Menu">
 				<ul className="navigation-menu">
 					<Links routes={routes} />
 				</ul>

@@ -6,7 +6,7 @@ const { User } = require('./user.model');
  * @param {Express.Request} req - Express request object
  * @return {User}
  */
-module.exports.getUser = function (req) {
+module.exports.getUser = function (_req) {
 	// TODO: Implement
 	return new User();
 };
@@ -17,7 +17,7 @@ module.exports.getUser = function (req) {
  * @param {Express.Request} req - Express request object
  * @return {User}
  */
-module.exports.login = function (req) {
+module.exports.login = function (_req) {
 	// TODO: Implement
 	return new User();
 };
