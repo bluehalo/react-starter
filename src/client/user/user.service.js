@@ -1,24 +1,28 @@
 import superagent from 'superagent';
 
+// Get User Query
+let getUserQuery = `query GetUser($id: String!){
+	getUser(id: $id){
+		id,
+		roles
+	}
+}`;
+
 /**
  * @module UserService
  * @description All requests related to user functionality
  */
 export default {
 	/**
-	 * @function login
-	 * @description Authenticate a user
-	 * @param {string} username
-	 * @param {string} password
+	 * @function getUser
+	 * @description Get information about a user
 	 */
-	login(username, password) {
-		return superagent.post('/api/user/login').send({ username, password });
-	},
-	/**
-	 * @function getActiveUser
-	 * @description Get the active user
-	 */
-	getActiveUser() {
-		return superagent.get('/api/user/active');
+	getUser() {
+		return superagent.post('/api/graphql').send({
+			query: getUserQuery,
+			variables: {
+				id: '1',
+			},
+		});
 	},
 };

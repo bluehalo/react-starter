@@ -1,4 +1,4 @@
-import { getActiveUser } from '../user/user.actions';
+import { getUser } from '../user/user.actions';
 import React, { useEffect, useState } from 'react';
 import Switch from '../routing/Switch';
 import Links from '../routing/Links';
@@ -16,7 +16,7 @@ export default function Body(props) {
 
 	// Run this effect when the components mounts, only once
 	useEffect(() => {
-		store.dispatch(getActiveUser()).then(() => setIsLoading(false));
+		store.dispatch(getUser()).then(() => setIsLoading(false));
 	}, []);
 
 	return (

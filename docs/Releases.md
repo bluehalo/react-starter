@@ -15,6 +15,8 @@ Use the following checklist as a guide of what to do in preparation for a releas
     - Include the date (something like `12/25/2020`) in the message.
 6. Push your tag.
 
+> DO NOT SKIP CREATING AND PUSHING YOUR TAG. This will cause a problem generating changelogs in the future and requires manual intervention, and its a pain in the ass.
+
 ## Deployment
 
 After completing the release checklist, you are ready to deploy the webapp. You will need to consult the infrastructure documentation for the remaining steps to actually do the deployment. If there are any special considerations for the deployment that are linked to changes elsewhere in the codebase, e.g. migration scripts for database updates or code changes connecting to new infrastructure, make sure to document them according to your projects guidelines.

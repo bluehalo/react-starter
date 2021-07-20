@@ -50,22 +50,3 @@ Before merging a PR, make sure the following has been verified:
 ## Semantic Versioning
 
 This project follows [semantic versioning](https://semver.org/). When you are preparing a release, please update the version appropriately.
-
-## Change Log Generation
-
-In order to generate change logs properly, we must follow a specific workflow.Change logs work based on tags. So when running the command, it will try to grab all valid commits since the beginning of time, or the latest tag. This is why
-**CREATING TAGS IS SUPER IMPORTANT**. Please follow this workflow to ensure change logs can be correctly generated.
-
-1. Branch off of develop using a branch name according to the convention above.
-2. After making changes, commit your code using commit messages that follow the
-   [conventional commit](https://www.conventionalcommits.org/) standard.
-3. Submit your pull request to develop. If you can squash into a single commit,please do to prevent the change logs from getting too large and difficult to read.
-   Make sure the squashed commit follows conventional commits convention.
-4. When it is time to cut a release, bump the version in your package.json based on [semantic versioning](https://semver.org/).
-5. On `develop`, run yarn changelog from the app directory.
-6. Use a signed commit(git commit -as -m 'Publish') to commit. You can use `Publish` here as opposed to a conventional commit message because we do not want this commit to show up in future change logs as this is just a deployment commit.
-7. Create a PR to `master`. Wait until PR is merged before moving to the next step.
-8. Create a tag based on this version. e.g. `git tag -a 1.0.0` and give it a basic non conventional commit message, like `Version 1.0.0`.
-9. Push tags once PR is approved.
-
-> DO NOT SKIP STEP 8 UNDER ANY CIRCUMSTANCES. This will lead to invalid change logs unless manually addressed.

@@ -36,12 +36,17 @@ module.exports = async function main(webpackConfig) {
 		}
 	}
 
+	// TODO: If using a DB, setup a connection here
+
 	// Finish setting up the server
+	// For configureGraphQL, you can give it a context object to be passed in to your resolvers,
+	// this will make it easy for your resolvers to access a database object and query it
 	server
+		.configureGraphQL()
 		.setPublicDirectory(config.server.publicDirectory)
 		.setPublicRoutes(config.files.routes)
 		.setSPARoute()
 		.listen(config.server.port);
 
-	logger.info(`Server listnening on port: ${config.server.port}`);
+	logger.info(`Server listening on port: ${config.server.port}`);
 };

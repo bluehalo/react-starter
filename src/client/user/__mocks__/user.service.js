@@ -26,10 +26,10 @@ function setResults(results) {
 }
 
 /**
- * @function getActiveUser
+ * @function getUser
  * @returns {Promise<object>}
  */
-service.getActiveUser = () =>
+service.getUser = () =>
 	new Promise((resolve, reject) => {
 		if (service.__results) {
 			return resolve(service.__results);

@@ -1,3 +1,4 @@
+const { setupExpressGraphQL } = require('./graphql');
 const { parseAssetPaths } = require('./webpack');
 const compression = require('compression');
 const session = require('express-session');
@@ -97,7 +98,24 @@ module.exports = class Server {
 	 * See https://helmetjs.github.io/ for defaults
 	 */
 	configureHelmet() {
-		this.app.use(helmet());
+		// TODO: This is disabled so GraphiQL can run, we can probably play around with some
+		// more optimal ways of setting a specific policy instead of disabling it completely
+		this.app.use(
+			helmet({
+				contentSecurityPolicy: false,
+			}),
+		);
+
+		return this;
+	}
+
+	/**
+	 * @method setupGraphQL
+	 * @description Use this to configure GraphQL in Express
+	 * @param {object} context - Any additional context to pass to the resolvers
+	 */
+	configureGraphQL(context = {}) {
+		this.app.use('/api/graphql', setupExpressGraphQL(context));
 
 		return this;
 	}

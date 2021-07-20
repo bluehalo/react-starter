@@ -16,7 +16,7 @@ export default function SecureRoute(props) {
 			path={path}
 			exact={exact}
 			render={(routerProps) => {
-				let roles = user.getIn(['data', 'roles']);
+				let roles = user.getIn(['data', 'roles'], []);
 				// Only render the target page if the user has the required roles
 				if (requiredRoles.isSubset(roles) || roles.includes('admin')) {
 					return render(routerProps);

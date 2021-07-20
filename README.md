@@ -13,6 +13,7 @@ Follow the steps below to get the app running on your local machine:
 1. Run `yarn install`.
 2. Run `yarn dev`.
 3. Open your browser to `http://localhost:3000`.
+4. Optional. Open your broswer to `http://localhost:3000/api/graphql` to explore the API.
 
 ## Scripts
 

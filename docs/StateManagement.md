@@ -51,13 +51,11 @@ There are four general categories most shared state will fall into. Use the foll
 Most API calls will be stored in state using the following structure:
 
 ```javascript
-import { REQUEST } from 'constants/status';
-
 let defaultAppState = {
     // unique name for the API call
     countries: {
         // Available statuses are PENDING, COMPLETE, or FAILED
-        status: QUERY.PENDING,
+        status: 'PENDING',
         // Error from the API call
         error: undefined,
         // Raw response from the API
@@ -135,15 +133,13 @@ let action = {
 Synchronous actions are fairly straight forward, but do not have the capability to access the current state. A sample synchronous action would look something like this:
 
 ```javascript
-import { USER_LOGOUT, UPDATE_COUNTRY } from 'constants';
-
 // Without any data
-export function logout() {
-    return { type: USER_LOGOUT };
+export function reset() {
+    return { type: 'RESET_STATUS' };
 }
 // With data
-export function setCountry(country) {
-    return { type: UPDATE_COUNTRY, data: country };
+export function updateStatus(status) {
+    return { type: 'UPDATE_STATUS', data: status };
 }
 ```
 
@@ -152,7 +148,6 @@ export function setCountry(country) {
 Asynchronous actions have a different signature. They must return a function and that function will have a `dispatcher` and a `getState` method injected into them. If your asynchronous action does not invoke the dispatcher, your store will never update. You must make sure to catch and handle all errors. Here is an example of an asynchronous action:
 
 ```javascript
-import { FETCH_DATA_SUCCESS, FETCH_DATA_ERROR } from 'constants';
 import service from 'services/user.service';
 
 export const fetchUserData (username) {
@@ -162,14 +157,14 @@ export const fetchUserData (username) {
         return service.getUserInfo(username)
             .then((response) => {
                 return dispatch({
-                    type: FETCH_DATA_SUCCESS,
+                    type: 'FETCH_DATA_SUCCESS',
                     current: getState(),
                     data: response
                 });
             })
             .catch((err) => {
                 return dispatch({
-                    type: FETCH_DATA_ERROR,
+                    type: 'FETCH_DATA_ERROR',
                     data: err
                 });
             });
@@ -180,12 +175,10 @@ export const fetchUserData (username) {
 In this example, if the request is successful, we dispatch an action with the response from the API, along with the current state (which is optional). If the request fails, we dispatch a different action indicating a failure along with the error from the API. You can also use this if you need access to shared state when the action is not async, that would look like this:
 
 ```javascript
-import { UPDATE_INFORMATION } from 'constants';
-
 export function updateInfo(information) {
     return (dispatch, getState) => {
         dispatch({
-            type: UPDATE_INFORMATION,
+            type: 'UPDATE_INFORMATION',
             data: information,
             current: getState(),
         });
@@ -202,12 +195,10 @@ Synchronous actions are really easy to test and you should do ss for all of them
 Reducers should always be synchronous and immutable where possible. If your reducers are immutable, it will make it easier to optimize your app later using pure components due to memoization. Reducers in general should look something like this:
 
 ```javascript
-import { UPDATE_INFORMATION } from 'constants';
-
 export function updateInfo(state = defaultState, action) {
     let { type, data } = action;
 
-    if (type === UPDATE_INFORMATION) {
+    if (type === 'UPDATE_INFORMATION') {
         // Return a new version of the state if an object or array
         return Object.assign({}, state, data);
     }
