@@ -16,7 +16,7 @@ describe('User Reducer Tests', () => {
 			let response = { getUser: { username: 'scooby', roles: [] } };
 			let results = getUser(defaultAppState.user, { type: 'user/get', data: response });
 
-			expect(results.get('data')).toEqual(response.getUser);
+			expect(results.get('data').toJS()).toEqual(response.getUser);
 			expect(results.get('status')).toEqual('SUCCESS');
 			expect(results.get('error')).toBeUndefined();
 		});
