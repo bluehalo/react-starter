@@ -1,4 +1,5 @@
 import { defaultAppState } from '../config';
+import { fromJS } from 'immutable';
 
 /**
  * @function getUser
@@ -14,7 +15,7 @@ export function getUser(state = defaultAppState.user, action) {
 		// Successfully got a user
 		case 'user/get':
 			return state.withMutations((user) => {
-				user.set('status', 'SUCCESS').set('error', undefined).set('data', data.getUser);
+				user.set('status', 'SUCCESS').set('error', undefined).set('data', fromJS(data.getUser));
 			});
 		// Unable to retrieve a user
 		case 'user/get-failure':
