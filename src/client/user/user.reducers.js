@@ -1,4 +1,5 @@
 import { defaultAppState } from '../config';
+import { fromJS } from 'immutable';
 
 /**
  * @function getUser
@@ -18,7 +19,7 @@ export function getUser(state = defaultAppState.user, action) {
 			return state.withMutations((user) => {
 				user.set('status', 'SUCCESS')
 					.set('error', undefined)
-					.set('data', data);
+					.set('data', fromJS(data));
 			});
 		// User was unable to login for some reason or
 		// we are unable to get the current user
