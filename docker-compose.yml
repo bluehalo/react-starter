@@ -1,0 +1,47 @@
+version: "3.7"
+    
+services:
+  mongo:
+    image: mongo:5
+    volumes:
+      - db_data:/data/db
+    restart: always
+    logging:
+      driver: none
+    environment:
+      MONGO_INIT_DB_ROOT_USERNAME: foo
+      MONGO_INIT_DB_ROOT_PASSWORD: bar
+    
+  app:
+    build:
+      context: ./app
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    environment:
+      ENVIRONMENT: local
+      DB_USER: foo
+      DB_PASS: bar
+      DB_HOST: mongo
+    volumes:
+      - "./app/src:/srv/src"
+      - "./app/bin:/srv/bin"
+
+  devops:
+    build:
+      context: ./devops
+    command: bash
+    environment:
+      # Move the bash history to its own folder
+      - HISTFILE=/root/bash_history/.bash_history
+    volumes:
+      # Store the history
+      - devops_history:/root/bash_history
+      - ./:/root/repo
+      - $HOME/.ssh:/root/.ssh
+      - ~/.aws:/root/.aws
+
+
+volumes:
+  db_data:
+  devops_history:

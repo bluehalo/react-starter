@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 
 # Update our image
 RUN apt-get -y update && \
@@ -15,6 +15,9 @@ RUN npm install
 
 # Copy over the remaining source code
 COPY src /srv/src
+COPY Entrypoint.sh ./
+RUN chmod +x ./Entrypoint.sh
 
 # Run our app
+ ENTRYPOINT [ "/srv/Entrypoint.sh" ]
 CMD ["npm", "start"]
