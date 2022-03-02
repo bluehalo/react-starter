@@ -1,7 +1,6 @@
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
-import { List } from 'immutable';
 import React from 'react';
 
 /**
@@ -19,7 +18,7 @@ export default [
 	{
 		/* istanbul ignore next line */
 		component: React.lazy(() => import(/* webpackChunkName: "home" */ './entries/home/index')),
-		requiredRoles: new List(),
+		requiredRoles: [],
 		icon: HomeIcon,
 		name: 'Home',
 		exact: true,
@@ -28,7 +27,7 @@ export default [
 	{
 		/* istanbul ignore next line */
 		component: React.lazy(() => import(/* webpackChunkName: "dashboard" */ './entries/dashboard/index')),
-		requiredRoles: new List(['admin']),
+		requiredRoles: ['admin'],
 		icon: DashboardIcon,
 		name: 'Dashboard',
 		exact: true,
@@ -37,7 +36,7 @@ export default [
 	{
 		/* istanbul ignore next line */
 		component: React.lazy(() => import(/* webpackChunkName: "info" */ './entries/info/index')),
-		requiredRoles: new List(),
+		requiredRoles: [],
 		icon: InfoIcon,
 		name: 'Info',
 		exact: true,
@@ -46,6 +45,6 @@ export default [
 	{
 		/* istanbul ignore next line */
 		component: React.lazy(() => import(/* webpackChunkName: "not-found" */ './entries/not-found/index')),
-		requiredRoles: new List(),
+		requiredRoles: [],
 	},
 ];

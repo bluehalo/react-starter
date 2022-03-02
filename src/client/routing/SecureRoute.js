@@ -1,5 +1,5 @@
-import { Redirect, Route } from 'react-router-dom';
 import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 
 /**
  * @function SecureRoute
@@ -16,9 +16,9 @@ export default function SecureRoute(props) {
 			path={path}
 			exact={exact}
 			render={(routerProps) => {
-				let roles = user.getIn(['data', 'roles']);
+				let roles = user.data.roles
 				// Only render the target page if the user has the required roles
-				if (requiredRoles.isSubset(roles) || roles.includes('admin')) {
+				if (roles.includes('admin')) {
 					return render(routerProps);
 				}
 				// Redirect to the homepage when the incorrect page is accessed

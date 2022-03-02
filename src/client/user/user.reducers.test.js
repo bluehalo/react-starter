@@ -1,6 +1,5 @@
 import { defaultAppState } from '../config';
 import { getUser } from './user.reducers';
-import { Map } from 'immutable';
 
 describe('User Reducer Tests', () => {
 	describe('reducer: getUser', () => {
@@ -49,7 +48,7 @@ describe('User Reducer Tests', () => {
 
 		test('should reset the user state on logout', () => {
 			let current = defaultAppState.user
-				.set('data', new Map({ username: 'Scooby Doo' }))
+				.set('data', { username: 'Scooby Doo' })
 				.set('status', 'SUCCESS');
 
 			let results = getUser(current, { type: 'user/logout' });
