@@ -18,7 +18,7 @@ export default function SecureRoute(props) {
 			render={(routerProps) => {
 				let roles = user.data.roles
 				// Only render the target page if the user has the required roles
-				if (roles.includes('admin')) {
+				if (requiredRoles.every((role) => roles.includes(role))) {
 					return render(routerProps);
 				}
 				// Redirect to the homepage when the incorrect page is accessed

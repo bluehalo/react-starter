@@ -1,10 +1,10 @@
-import { getActiveUser } from '../user/user.actions';
 import React, { useEffect, useState } from 'react';
-import Switch from '../routing/Switch';
-import Links from '../routing/Links';
 import routes from '../routes';
-import Loader from './Loader';
+import Links from '../routing/Links';
+import Switch from '../routing/Switch';
 import store from '../store';
+import { getActiveUser } from '../user/user.actions';
+import Loader from './Loader';
 
 /**
  * @function Body
