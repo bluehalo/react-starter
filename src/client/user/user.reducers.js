@@ -35,7 +35,12 @@ export function getUser(state = defaultAppState.user, action) {
 			return nextState;
 		// User logging out, reset all defaults
 		case 'user/logout':
-			return defaultAppState.user;
+			nextState = produce(state, (mutateState) => {
+				mutateState.status = 'INCOMPLETE';
+				mutateState.error = undefined;
+				mutateState.data = {roles: []};
+			});
+			return nextState;
 		default:
 			return state;
 	}
