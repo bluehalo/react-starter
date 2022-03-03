@@ -1,7 +1,7 @@
+import { default as React } from 'react';
 import { Switch as ReactRouterSwitch } from 'react-router-dom';
-import SecureRoute from './SecureRoute';
 import Loader from '../core/Loader';
-import React from 'react';
+import SecureRoute from './SecureRoute';
 
 /**
  * @function Routes
