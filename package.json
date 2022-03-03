@@ -86,7 +86,6 @@
 		"glob": "^7.1.4",
 		"helmet": "^4.2.0",
 		"immer": "^9.0.12",
-		"immutable": "^4.0.0-rc.12",
 		"mini-css-extract-plugin": "^1.2.1",
 		"node-sass": "^7.0.1",
 		"passport": "^0.4.1",
