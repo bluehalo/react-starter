@@ -1,0 +1,23 @@
+FROM node:16 as builder
+
+# Set our working directory
+WORKDIR /srv
+
+# Copy in our package.json and other root files
+COPY package.json postcss.config.js /srv/
+
+# Then install any dependencies, this will help with caching
+RUN npm install
+
+# Copy over the remaining source code
+COPY src /srv/src
+
+# Build the app so that the apache container can steal the assets
+RUN npm run build
+
+# FROM httpd:2.4.54-alpine as server
+FROM httpd as server
+
+COPY proxy-html.conf /usr/local/apache2/conf/extra/
+COPY httpd.conf /usr/local/apache2/conf/
+COPY --from=builder /srv/bin /usr/local/apache2/htdocs

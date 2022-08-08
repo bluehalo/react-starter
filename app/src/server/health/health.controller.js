@@ -5,5 +5,6 @@
  * @param {Express.Response} res - Express response object
  */
 module.exports.healthcheck = function healthcheck(_req, res) {
+	console.log('fdsnajflndjsk')
 	return res.sendStatus(200);
 };

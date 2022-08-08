@@ -1,4 +1,5 @@
 const { Container, transports } = require('winston');
+const config = require('../config/config');
 
 // Create our default logging container
 let container = new Container();
@@ -7,7 +8,7 @@ let container = new Container();
 let transportConsole = new transports.Console({
 	timestamp: true,
 	colorize: true,
-	level: 'debug',
+	level: config.server.logLevel,
 });
 
 container.add('console', {

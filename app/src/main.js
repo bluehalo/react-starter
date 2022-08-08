@@ -2,6 +2,7 @@ const { wrapper } = require('./utils/async.utils');
 const container = require('./lib/winston');
 const compiler = require('./lib/webpack');
 const config = require('./config/config');
+const { configureRedis } = require('./lib/passport');
 const Server = require('./lib/express');
 
 /**
@@ -12,6 +13,11 @@ const Server = require('./lib/express');
 module.exports = async function main(webpackConfig) {
 	// Grab the development console logger
 	let logger = container.get('console');
+
+	if (config.server.useRedis) {
+		logger.info('Creating connection to Redis');
+		await configureRedis();
+	}
 
 	// Start setting up our server
 	logger.info('Initializing server');

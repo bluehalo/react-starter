@@ -22,7 +22,7 @@ Branches should always include a ticket number. If the branch is not correspondi
 Typically we create one branch per ticket. But depending on the ticket, you may
 need to branch off of `develop` or some other branch. For example, if your ticket is a subtask of a larger epic/strory, then there should be a branch for that epic/story and you should branch of that and not `develop`. If one does not exist yet, go ahead and create a branch for the epic/story, and then another for your subtask.
 
-### `develop` vs `main` or `master`
+### `develop` vs `main`
 
 We have two branches that should never be deleted. `develop` is our active development branch while `main` is our current release branch. All pull requests should be based on `develop`. When it comes time to cut a release, we will submit a PR from `develop` to `main` and verify all the changes are ready to be released. When code is merged to `develop`, it should be as close to production ready as possible and deployed to staging for testing.
 

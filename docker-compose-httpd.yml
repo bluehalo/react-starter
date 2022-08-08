@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
     
 services:
   mongo:
@@ -12,30 +12,37 @@ services:
       MONGO_INIT_DB_ROOT_USERNAME: foo
       MONGO_INIT_DB_ROOT_PASSWORD: bar
     
-  app:
+  backend:
     build:
       context: ./app
       dockerfile: dockerfiles/pureNode.development
-    ports:
-      - "3000:3000"
     command: npm run dev
     environment:
       ENVIRONMENT: local
-      LOG_LEVEL: debug
       DB_USER: foo
       DB_PASS: bar
       DB_HOST: mongo
-      USE_REDIS: true
-      REDIS_HOST: redis
+      BUILD_UI: false
+    logging:
+      driver: json-file
+    ports:
+      - "3001:3000"
     volumes:
       - "./app/src:/srv/src"
       - "./app/bin:/srv/bin"
+  
+  httpd:
+    build:
+      context: ./app
+      dockerfile: dockerfiles/httpd
+    ports:
+      - "3000:80"
+    environment:
+      APP_BACKEND: backend
+    logging:
+      driver: none
     depends_on:
-    #   - mongo
-      - redis
-
-  redis:
-    image: redis
+      - backend
 
   devops:
     build:
@@ -49,13 +56,6 @@ services:
       - $HOME/.ssh:/root/.ssh
       # enable aws access
       - ~/.aws:/root/.aws
-
-  nginx:
-    build:
-      context: ./app
-      dockerfile: dockerfiles/nginx
-    ports:
-      - 8080:80
 
 volumes:
   db_data:

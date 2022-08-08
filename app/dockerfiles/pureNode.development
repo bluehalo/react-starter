@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 # Update our image
 RUN apt-get -y update && \
@@ -19,5 +19,5 @@ COPY Entrypoint.sh ./
 RUN chmod +x ./Entrypoint.sh
 
 # Run our app
- ENTRYPOINT [ "/srv/Entrypoint.sh" ]
+ENTRYPOINT [ "/srv/Entrypoint.sh" ]
 CMD ["npm", "start"]

@@ -21,21 +21,18 @@ services:
     command: npm run dev
     environment:
       ENVIRONMENT: local
-      LOG_LEVEL: debug
       DB_USER: foo
       DB_PASS: bar
       DB_HOST: mongo
-      USE_REDIS: true
-      REDIS_HOST: redis
     volumes:
       - "./app/src:/srv/src"
       - "./app/bin:/srv/bin"
-    depends_on:
+    # depends_on:
     #   - mongo
-      - redis
+    #   - redis
 
-  redis:
-    image: redis
+    redis:
+      from: redis
 
   devops:
     build:

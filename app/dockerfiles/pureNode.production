@@ -1,0 +1,23 @@
+FROM node:16
+
+# Update our image
+RUN apt-get -y update && \
+    apt-get clean
+
+# Set our working directory
+WORKDIR /srv
+
+# Copy in our package.json and other root files
+COPY package.json postcss.config.js /srv/
+
+# Then install any dependencies, this will help with caching
+RUN npm install --production
+
+# Copy over the remaining source code
+COPY src /srv/src
+COPY Entrypoint.sh ./
+RUN chmod +x ./Entrypoint.sh
+
+# Run our app
+ENTRYPOINT [ "/srv/Entrypoint.sh" ]
+CMD ["npm", "start"]

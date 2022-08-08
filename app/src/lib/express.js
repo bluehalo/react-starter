@@ -1,7 +1,12 @@
+'use-strict';
+const { getSessionStore } = require('./passport');
 const { parseAssetPaths } = require('./webpack');
 const compression = require('compression');
 const session = require('express-session');
+const config = require('../config/config');
 const bodyParser = require('body-parser');
+const container = require('./winston');
+const logger = container.get('console');
 const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
@@ -56,9 +61,10 @@ module.exports = class Server {
 	configureSession() {
 		this.app.use(
 			session({
-				saveUninitialized: true,
-				secret: 'keyboard-cat',
-				resave: true,
+				...config.server.session,
+				...{
+					store: getSessionStore(),
+				}
 			}),
 		);
 
@@ -73,7 +79,7 @@ module.exports = class Server {
 		this.app.use(passport.initialize());
 		this.app.use(passport.session());
 		// Configure passport and setup and strategies
-		require('./passport').initialize();
+		require('./passport').initialize(passport);
 
 		return this;
 	}
@@ -123,6 +129,7 @@ module.exports = class Server {
 	 * to set itself up with express
 	 */
 	setPublicRoutes(routes = []) {
+		logger.debug(JSON.stringify(routes, null, 4));
 		routes.forEach((route) => this.app.use(require(route)));
 
 		return this;
