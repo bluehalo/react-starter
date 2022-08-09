@@ -47,7 +47,7 @@ module.exports = async function main(webpackConfig) {
 		.setPublicDirectory(config.server.publicDirectory)
 		.setPublicRoutes(config.files.routes)
 		.setSPARoute()
-		.listen(config.server.port);
+		.listen(config.server.listener.port);
 
-	logger.info(`Server listnening on port: ${config.server.port}`);
+	logger.info(`Server listnening on port: ${config.server.listener.port}`);
 };

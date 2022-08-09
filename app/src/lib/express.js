@@ -185,7 +185,19 @@ module.exports = class Server {
 	 * @param {function} [callback] - Optional callback for listen
 	 */
 	listen(port, callback) {
-		this.app.listen(port, callback);
+		let server;
+		if (config.server.listener.enableSsl) {
+			server = require('https').createServer({
+				key: config.server.listener.sslKey,
+				cert: config.server.listener.sslCert,
+				// The passphrase can be undefined if it does not matter
+				passphrase: config.server.listener.sslKeyPassphrase
+			}, this.app);
+		} else {
+			server = require('http').createServer(this.app);
+		}
+		
+		server.listen(port, callback);
 
 		return this;
 	}

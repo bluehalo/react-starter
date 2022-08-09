@@ -26,9 +26,13 @@ services:
       DB_HOST: mongo
       USE_REDIS: true
       REDIS_HOST: redis
+      ENABLE_SSL: false
+      SSL_KEY_PASSWORD: DO_NOT_USE_THIS
     volumes:
       - "./app/src:/srv/src"
       - "./app/bin:/srv/bin"
+      - "./app/certs/example.cert:/srv/server.cert"
+      - "./app/certs/example.key:/srv/server.key"
     depends_on:
     #   - mongo
       - redis
