@@ -5,7 +5,8 @@ const { createClient } = require('redis'),
 	  throwIfCantConnect = true,
 	  connectRedis = require('connect-redis'),
 	  container = require('./winston'),
-	  config = require('./../config/config');
+	  config = require('./../config/config'),
+	  logger = container.get('console');
 
 let redisClient, RedisStore;
 
@@ -35,17 +36,23 @@ module.exports.initialize = function initialize(passport) {
  */
 //@TODO: Abstract this to be a generic remote store so we can make this work with mogno
 module.exports.configureRedis = async () => {
-	// @TODO: make this configuration based
+	let conString = 'redis://';
+	const redisConf = config.server.redis;
+
+	if (redisConf.username && redisConf.password) {
+		conString += `${redisConf.username}:${redisConf.password}@`;
+	}
+	conString += `${redisConf.host}:${redisConf.port}`;
+
     redisClient = createClient({
-		url: 'redis://redis:6379',
+		url: conString,
 		legacyMode: true
 	});
     
     let prom = redisClient.connect();
     if (!throwIfCantConnect) {
         prom = prom.catch(err => {
-			// @TODO: Use the logger
-            console.error(err);
+            logger.error(err);
         });
     }
 

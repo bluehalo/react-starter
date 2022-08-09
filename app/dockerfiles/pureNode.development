@@ -19,4 +19,4 @@ COPY Entrypoint.sh ./
 
 # Run our app
 ENTRYPOINT [ "/srv/Entrypoint.sh" ]
-CMD ["npm", "dev"]
+CMD ["npm", "run", "dev"]
