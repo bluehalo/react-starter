@@ -9,3 +9,6 @@ node_modules
 coverage
 public
 bin
+
+# Precaution
+app/certs
