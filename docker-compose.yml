@@ -15,7 +15,7 @@ services:
   app:
     build:
       context: ./app
-      dockerfile: dockerfiles/pureNode.production
+      dockerfile: dockerfiles/pureNode.development
     ports:
       - "3000:3000"
     environment:
