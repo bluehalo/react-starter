@@ -1,5 +1,3 @@
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 const container = require('./winston');
 const webpack = require('webpack');
 
@@ -38,6 +36,9 @@ module.exports.compile = function compile(config) {
  * @param {object} config - Webpack configurations
  */
 module.exports.middleware = function middleware(config) {
+	const webpackDevMiddleware = require('webpack-dev-middleware');
+	const webpackHotMiddleware = require('webpack-hot-middleware');
+
 	let compiler = webpack(config);
 	return {
 		webpackDevMiddleware: webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }),

@@ -30,7 +30,7 @@ We have two branches that should never be deleted. `develop` is our active devel
 
 Before submitting a pull request, verify the following:
 
--   All javascript code has been formatted with prettier (e.g. `yarn prettier`).
+-   All javascript code has been formatted with prettier (e.g. `npm prettier`).
 -   All terraform code has been formatted with `terraform fmt`.
 -   Any new code adds unit tests and updates to old code updates relevant tests.
 -   All tests/linting passes.

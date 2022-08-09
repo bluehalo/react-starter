@@ -10,14 +10,14 @@ You will need to have either [Nodejs](https://nodejs.org/en/download/) or [Docke
 
 Follow the steps below to get the app running on your local machine:
 
+1. `docker-compose up --build app`
+
+Alternatively, you can run the app in directly on your machine if you do not have docker installed
+
 1. Navigate into the app folder.
 1. Run `npm i`.
 1. Run `npm run dev`.
 1. Open your browser to `http://localhost:3000`.
-
-Alternatively, you can run the app in docker which adds a mongo database
-
-1. docker-compose up --build app
 
 ## Scripts
 
@@ -38,7 +38,7 @@ Other highlights of the container include:
 1. Volumes in the host machine's aws and ssh credentials
 1. volumes in the entire repo to keep the docker context non-existant
 
-### Running (TODO)
+### Running the devops container (TODO)
 
 1. Make sure your aws credentials are valid
 1. Run `docker-compose build devops && docker-compose run devops`
@@ -59,4 +59,4 @@ Read more on the following topics in our included docs:
 
 ## Known issues:
 
-- If a module unfound error is thrown, the live restart does not work as it doesn't run npm installs. The process should exit instead
+- If a module unfound error from a missing npm package is thrown, the live restart does not work as it doesn't run npm installs. The process should exit instead

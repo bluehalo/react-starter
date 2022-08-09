@@ -15,10 +15,9 @@ services:
   app:
     build:
       context: ./app
-      dockerfile: dockerfiles/pureNode.development
+      dockerfile: dockerfiles/pureNode.production
     ports:
       - "3000:3000"
-    command: npm run dev
     environment:
       ENVIRONMENT: local
       LOG_LEVEL: debug
