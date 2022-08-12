@@ -3,7 +3,6 @@ const { getSessionStore } = require('./passport');
 const { parseAssetPaths } = require('./webpack');
 const compression = require('compression');
 const session = require('express-session');
-const config = require('../config/config');
 const bodyParser = require('body-parser');
 const container = require('./winston');
 const logger = container.get('console');
@@ -11,6 +10,7 @@ const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
 const path = require('path');
+const cors = require('cors');
 const fs = require('fs');
 
 /**
@@ -18,9 +18,10 @@ const fs = require('fs');
  * @description Logging container for the application
  */
 module.exports = class Server {
-	constructor() {
+	constructor(config) {
 		// Setup express
 		this.app = express();
+		this.config = config;
 		// Always return self for chaining
 		return this;
 	}
@@ -55,13 +56,24 @@ module.exports = class Server {
 	}
 
 	/**
+	 * @method configureCores
+	 * @description If desired, adds a global cors configuration
+	 * Not designed, to have the config pass in a function if you need dynamic cors
+	 * updates, like from a database. If that need happens, modify this function
+	 */
+	configureCores() {
+		this.app.use(cors(this.config.cors.config));
+		return this;
+	}
+
+	/**
 	 * @method configureSession
 	 * @description Set up express session
 	 */
 	configureSession() {
 		this.app.use(
 			session({
-				...config.server.session,
+				...this.config.session,
 				...{
 					store: getSessionStore(),
 				}
@@ -186,12 +198,12 @@ module.exports = class Server {
 	 */
 	listen(port, callback) {
 		let server;
-		if (config.server.listener.enableSsl) {
+		if (this.config.listener.enableSsl) {
 			server = require('https').createServer({
-				key: config.server.listener.sslKey,
-				cert: config.server.listener.sslCert,
+				key: this.config.listener.sslKey,
+				cert: this.config.listener.sslCert,
 				// The passphrase can be undefined if it does not matter
-				passphrase: config.server.listener.sslKeyPassphrase
+				passphrase: this.config.listener.sslKeyPassphrase
 			}, this.app);
 		} else {
 			server = require('http').createServer(this.app);

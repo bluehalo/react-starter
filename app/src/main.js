@@ -21,11 +21,12 @@ module.exports = async function main(webpackConfig) {
 
 	// Start setting up our server
 	logger.info('Initializing server');
-	let server = new Server()
+	let server = new Server(config.server)
 		.configureMiddleware()
 		.configureSession()
 		.configurePassport()
 		.configureHelmet()
+		.configureCores()
 		.configureViewEngine('pug', config.files.views)
 		.configureLocals(config.locals);
 

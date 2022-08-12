@@ -32,6 +32,16 @@ module.exports = {
 			sslKey: env.get('SSL_KEY').asString(),
 			sslKeyPassphrase: env.get('SSL_KEY_PASSWORD').asString()
 		},
+		cors: {
+			// @link: https://www.npmjs.com/packages/cors#configuration-options
+			config: {
+				// origin: "*",
+				origin: false, //enable cors via this line
+				methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+				preflightContinue: false,
+				optionsSuccessStatus: 204,
+			}
+		},
 		session: {
 			name: 'connect.id',
 			// Force everyone to have a session even if they are not logged in.
