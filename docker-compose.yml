@@ -43,6 +43,8 @@ services:
   devops:
     build:
       context: ./devops
+    environment:
+      - HISTFILE=/root/bash_history/.bash_history
     volumes:
       # Store the history
       - devops_history:/root/bash_history

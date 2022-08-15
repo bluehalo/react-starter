@@ -3,9 +3,11 @@ FROM golang
 # Update our image
 RUN echo "Updating base container" && \
     apt-get -y update && \
-    apt-get -y install zip && \
+    apt-get -y install zip python3 python3-pip && \
     apt-get -y upgrade && \
+    pip install awscli && \
     apt-get clean && \
+    echo "Installing node version manager" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
     echo "Installing tfenv" && \
     git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
@@ -16,9 +18,9 @@ RUN echo "Updating base container" && \
     echo "Installing SOPS" && \
     go install go.mozilla.org/sops/v3/cmd/sops@v3.7.1
 
-RUN tfenv install v1.1.2 && \
-    tfenv use 1.1.2 && \
-    tgenv install 0.35.16 && \
+RUN tfenv install v1.1.7 && \
+    tfenv use 1.1.7 && \
+    tgenv install 0.38.7 && \
     bash -c "source ~/.bashrc && nvm install 17"
 
 WORKDIR /root/repo

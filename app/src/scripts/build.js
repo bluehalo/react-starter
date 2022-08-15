@@ -6,14 +6,22 @@ const path = require('path');
 const pug = require('pug');
 const fs = require('fs');
 const { promisify } = require('util');
+const { server } = require('../config/config');
 const { parseAssetPaths } = require(path.resolve('src/lib/webpack'));
+const binPath = path.resolve('bin');
 
 // Grab our webpack config
 let config = require(path.resolve('src/config/webpack.prod'));
 
-require(path.resolve('src/lib/webpack')).compile(config).then(async () => {
+// Clean out the old files first
+fs.rmSync(binPath + '/' + server.publicDirectory, {recursive: true});
+promisify(fs.readdir)(binPath).then(files => {
+    for (const file of files) {
+        fs.unlinkSync(binPath + '/' + file);
+    }
+}).then(async () => {
+    await require(path.resolve('src/lib/webpack')).compile(config);
     let statsPath = path.resolve('bin/stats.json');
-    let binPath = path.resolve('bin');
     let css = '';
     let stats = require(statsPath);
     // Parse out code paths and styles, the format of this changes from
