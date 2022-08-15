@@ -14,6 +14,7 @@ const binPath = path.resolve('bin');
 let config = require(path.resolve('src/config/webpack.prod'));
 
 // Clean out the old files first
+// @TODO: this break if there is no publicDirectory, aka the first build
 fs.rmSync(binPath + '/' + server.publicDirectory, {recursive: true});
 promisify(fs.readdir)(binPath).then(files => {
     for (const file of files) {
