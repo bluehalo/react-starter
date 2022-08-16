@@ -91,7 +91,7 @@
 		"immutable": "^4.0.0-rc.12",
 		"mini-css-extract-plugin": "^1.2.1",
 		"node-sass": "^7.0.0",
-		"passport": "^0.4.1",
+		"passport": "^0.6.0",
 		"postcss-loader": "^4.0.4",
 		"pug": "^3.0.0",
 		"react": "^17.0.1",
