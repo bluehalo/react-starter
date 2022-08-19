@@ -29,7 +29,7 @@ Alternatively, you can run the app in directly on your machine if you do not hav
 | prettier  | Format all JS code in the src directory |
 | build     | Generate the static js files for the ui |
 
-## Deployment Container (TODO)
+## Deployment Container 
 
 Built in is a container with terraform, terragrunt, and node all installed. The main purpose is so that there is a committed place of what version of each is necessary to deploy the code.
 
@@ -38,7 +38,7 @@ Other highlights of the container include:
 1. Volumes in the host machine's aws and ssh credentials
 1. volumes in the entire repo to keep the docker context non-existant
 
-### Running the devops container (TODO)
+### Running the devops container Example
 
 1. Make sure your aws credentials are valid
 1. Run `docker-compose build devops && docker-compose run devops`
@@ -46,7 +46,6 @@ Other highlights of the container include:
 1. Run `terragrunt init`
 1. Run `terragrunt apply`
 1. Wait for the apply to finish
-1. Navigate to the url given by terragrunt
 
 ## Conventions
 
