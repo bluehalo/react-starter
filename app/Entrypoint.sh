@@ -1,7 +1,8 @@
 #!/bin/bash
 
-echo "$@"
-echo ""
+set -e
+
+echo "Starting container with the commad \"$@\""
 
 # The application expects the certs to be pass in via its environment to prevent
 # Files from lingering on the server. Modify this in any way that is needed

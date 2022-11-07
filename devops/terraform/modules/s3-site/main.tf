@@ -8,10 +8,10 @@ resource "aws_s3_bucket_website_configuration" "s3_site" {
   error_document {
     key = "index.html"
   }
-  
-#   routing_rule {
-    
-#   }
+
+  #   routing_rule {
+
+  #   }
 
   depends_on = [
     aws_s3_bucket.host_bucket
@@ -116,7 +116,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   # Cache behavior with precedence 0
   ordered_cache_behavior {
-    path_pattern = "*"
+    path_pattern     = "*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = var.cname
@@ -150,8 +150,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   })
 
   viewer_certificate {
-    acm_certificate_arn = var.acm_arn == null ? aws_acm_certificate.cname_cert[0].arn : var.acm_arn
-    ssl_support_method = "sni-only"
+    acm_certificate_arn      = var.acm_arn == null ? aws_acm_certificate.cname_cert[0].arn : var.acm_arn
+    ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
 
@@ -162,10 +162,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 data "aws_iam_policy_document" "s3_policy" {
   statement {
-    actions   = ["s3:GetObject"]
+    actions = ["s3:GetObject"]
     resources = [
       "arn:aws:s3:::${var.host_s3_bucket}/${var.s3_prefix}/*"
-      ]
+    ]
 
     principals {
       type        = "AWS"
@@ -182,8 +182,8 @@ resource "aws_s3_bucket_policy" "host_bucket" {
 resource "aws_s3_bucket_public_access_block" "host_bucket" {
   bucket = aws_s3_bucket_website_configuration.s3_site.id
 
-  block_public_acls       = true
-  block_public_policy     = true
+  block_public_acls   = true
+  block_public_policy = true
   //ignore_public_acls      = true
   //restrict_public_buckets = true
 }

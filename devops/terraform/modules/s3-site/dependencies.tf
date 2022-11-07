@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "cname_cert" {
-  count = var.acm_arn == null ? 1 : 0
-  domain_name = var.cname
+  count             = var.acm_arn == null ? 1 : 0
+  domain_name       = var.cname
   validation_method = "DNS"
 
   tags = merge(var.tags, {

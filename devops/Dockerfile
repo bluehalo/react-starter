@@ -18,9 +18,9 @@ RUN echo "Updating base container" && \
     echo "Installing SOPS" && \
     go install go.mozilla.org/sops/v3/cmd/sops@v3.7.1
 
-RUN tfenv install v1.1.7 && \
-    tfenv use 1.1.7 && \
-    tgenv install 0.38.7 && \
+RUN tfenv install 1.3.3 && \
+    tfenv use 1.3.3 && \
+    tgenv install 0.39.2 && \
     bash -c "source ~/.bashrc && nvm install 17"
 
 WORKDIR /root/repo

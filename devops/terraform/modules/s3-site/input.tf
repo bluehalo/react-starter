@@ -13,9 +13,9 @@ variable "s3_prefix" {
   type        = string
   default     = ""
   description = "Prefix to use when storing the site in s3"
-  
+
   validation {
-    condition = can(regex("^[^\\/](?:.*[^\\/])?$", var.s3_prefix))
+    condition     = can(regex("^[^\\/](?:.*[^\\/])?$", var.s3_prefix))
     error_message = "No leading or trailing slashes are allowed."
   }
 }
@@ -32,7 +32,7 @@ variable "path_to_app" {
 
 variable "acm_arn" {
   type        = string
-  default = null
+  default     = null
   description = "Arn of an existing acm cert if applicable"
 }
 

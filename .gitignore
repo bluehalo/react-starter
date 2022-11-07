@@ -18,4 +18,5 @@ app/certs
 .terraform-cache
 .terragrunt.lock.hcl
 .terraform.lock.hcl
-./devops/terragrunt-test
+devops/terragrunt-test
+devops/scripts-test

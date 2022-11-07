@@ -160,6 +160,7 @@ module.exports = class Server {
 		// side router. The public routes would get invoked and block your SPA from
 		// loading the correct content on a page refresh
 		this.app.get('*', (req, res) => {
+			logger.debug('Received request on ' + req.path);
 			// Grab our stats, this will be cached in production
 			if (process.env.NODE_ENV === 'development') {
 				delete require.cache[statsPath];
@@ -199,6 +200,7 @@ module.exports = class Server {
 	listen(port, callback) {
 		let server;
 		if (this.config.listener.enableSsl) {
+			logger.debug('Starting the server in SSL mode');
 			server = require('https').createServer({
 				key: this.config.listener.sslKey,
 				cert: this.config.listener.sslCert,
@@ -206,6 +208,7 @@ module.exports = class Server {
 				passphrase: this.config.listener.sslKeyPassphrase
 			}, this.app);
 		} else {
+			logger.debug('Starting the server in a non SSL mode');
 			server = require('http').createServer(this.app);
 		}
 		
