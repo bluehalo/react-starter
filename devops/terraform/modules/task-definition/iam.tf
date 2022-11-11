@@ -18,6 +18,11 @@ resource "aws_iam_role" "task_role" {
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   ]
 
+  inline_policy {
+    name   = "AppPermissions"
+    policy = var.permissions
+  }
+
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({
@@ -50,6 +55,21 @@ resource "aws_iam_role" "task_execution_role" {
     "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   ]
+
+  inline_policy {
+    name = "SecretsAccess"
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = "secretsmanager:GetSecretValue"
+          Effect   = "Allow"
+          Sid      = ""
+          Resource = [for secret in var.secrets : secret.valueFrom]
+        }
+      ]
+    })
+  }
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.

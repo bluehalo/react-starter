@@ -73,6 +73,11 @@ variable "loadbalancer_subnets" {
   description = "Subnets to run the load balancer in (public/private)"
 }
 
+variable "region" {
+  type        = string
+  description = "Region to deploy the service to"
+}
+
 variable "tags" {
   type        = map(any)
   description = "Tags to apply to all resources. Ie: environment, cost tracking, etc..."
@@ -118,4 +123,10 @@ variable "health_check_path" {
   type        = string
   default     = "/api/healthcheck"
   description = "Path to the healthcheck endpoint"
+}
+
+variable "secrets" {
+  type        = list(map(string))
+  default     = []
+  description = "List of secrets to attach to the service"
 }

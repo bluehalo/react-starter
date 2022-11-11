@@ -28,6 +28,7 @@ resource "aws_ecs_task_definition" "service" {
           "awslogs-stream-prefix" = "streaming"
         }
       }
+      secrets = var.secrets
     }
   ])
 

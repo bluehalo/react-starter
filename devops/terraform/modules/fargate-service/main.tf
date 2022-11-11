@@ -1,3 +1,11 @@
+module "secrets" {
+  source = "../secrets"
+
+  secrets         = var.secrets
+  region          = var.region
+  recovery_window = 0
+}
+
 resource "aws_ecs_cluster" "cluster" {
   count = var.create_new_cluster ? 1 : 0
   name  = var.cluster_name
@@ -35,11 +43,16 @@ module "image" {
   image        = var.image_tag == null ? "${var.service_name}:latest" : var.image_tag
   log_group    = aws_cloudwatch_log_group.logs.name
   env_vars     = var.env_vars
+  secrets      = module.secrets.fargate_secrets
   port_mappings = [
     {
       containerPort = var.container_port
       hostPort      = var.container_port
     }
+  ]
+
+  depends_on = [
+    module.secrets
   ]
 }
 
