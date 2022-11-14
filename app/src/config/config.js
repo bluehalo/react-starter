@@ -3,6 +3,20 @@ const path = require('path'),
 	  env = require('env-var');
 
 /**
+ * @summary - Takes in a cert string that may or may not be 1 line and breaks it into a multiline 
+ * string. The rhetoric is for being able to set cert strings via a script in sops which doesn't store
+ * new line characters as anything but spaces
+ * @param {string} cert - Cert string passed in from the environment
+ * @returns a normalized cert string
+ */
+const normalizeCert = cert => {
+	let [header, content] = cert.trim().split(/-\s/);
+	let [body, footer] = content.split(/\s-/);
+	body = body.replace(/\s/g,"\n");
+	return `${header}-\n${body}\n-${footer}`;
+}
+
+/**
  * @exports
  * @description Server configurations based off either environment variables or hardcoded values
  * @summary The main idea here is to keep all containers identical, aka deploy your code to dev to
@@ -28,8 +42,8 @@ module.exports = {
 		listener: {
 			port: env.get('PORT').default('3000').asIntPositive(),
 			enableSsl: env.get('ENABLE_SSL').default('false').asBool(),
-			sslCert: env.get('SSL_CERT').asString(),
-			sslKey: env.get('SSL_KEY').asString(),
+			sslCert: normalizeCert(env.get('SSL_CERT').asString()),
+			sslKey: normalizeCert(env.get('SSL_KEY').asString()),
 			sslKeyPassphrase: env.get('SSL_KEY_PASSWORD').asString()
 		},
 		cors: {
