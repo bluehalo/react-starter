@@ -3,7 +3,8 @@
 logYellow() {
     local YELLOW='\033[0;33m'
     local NC='\033[0m'
-    echo -e "${YELLOW}$@${NC}"
+    text="$@"
+    echo "${YELLOW}" "$text" "${NC}"
 }
 
 cd ../..
