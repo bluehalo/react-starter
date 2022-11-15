@@ -66,3 +66,9 @@ variable "secrets" {
   default     = []
   description = "Secrets to load into the container's environment"
 }
+
+variable secrets_keys {
+  type = list(string)
+  default = []
+  description = "If there are any kms keys used with the secrets, add them here"
+}

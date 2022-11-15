@@ -60,14 +60,22 @@ resource "aws_iam_role" "task_execution_role" {
     name = "SecretsAccess"
     policy = jsonencode({
       Version = "2012-10-17"
-      Statement = [
+      Statement = concat([
         {
           Action   = "secretsmanager:GetSecretValue"
           Effect   = "Allow"
           Sid      = ""
           Resource = [for secret in var.secrets : secret.valueFrom]
+        }], length(var.secrets_keys) == 0 ? [] : [
+        {
+          Action   = [
+            "kms:Decrypt"
+          ]
+          Effect   = "Allow"
+          Sid      = ""
+          Resource = var.secrets_keys
         }
-      ]
+      ])
     })
   }
 

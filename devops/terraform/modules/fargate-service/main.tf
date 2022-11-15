@@ -4,7 +4,7 @@ module "secrets" {
   secrets         = var.secrets
   region          = var.region
   # @TODO: Fix the permissions when using a customer managed key
-  create_new_key  = false
+  create_new_key  = true
   recovery_window = 0
 }
 
@@ -47,6 +47,7 @@ module "image" {
   log_group    = aws_cloudwatch_log_group.logs.name
   env_vars     = var.env_vars
   secrets      = module.secrets.fargate_secrets
+  secrets_keys = module.secrets.kms_key != null ? [module.secrets.kms_key] : []
   port_mappings = [
     {
       containerPort = var.container_port
